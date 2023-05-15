@@ -17,6 +17,7 @@ public class ModeloProducto {
 		Conector con = new Conector();
 		con.conectar();
 		ArrayList<Producto> productos = new ArrayList<>();
+		ModeloSeccion mseccion = new ModeloSeccion();
 		
 		try {
 			PreparedStatement pSt = con.getCon().prepareStatement("SELECT * FROM productos;");
@@ -29,7 +30,7 @@ public class ModeloProducto {
 				producto.setCantidad(resultado.getInt("cantidad"));
 				producto.setPrecio(resultado.getDouble("precio"));
 				producto.setCaducidad(resultado.getDate("caducidad"));
-				producto.setId_seccion(resultado.getInt("id_seccion"));
+				producto.setSeccion(mseccion.cargarSeccion(resultado.getInt("id_seccion")));
 				productos.add(producto);
 			}
 			pSt.close();

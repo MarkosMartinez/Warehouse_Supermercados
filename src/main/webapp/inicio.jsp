@@ -14,7 +14,7 @@
 <h1>Lista de productos:</h1>
 
 <table class="table">
-  <thead>
+  <thead class="table-light">
     <tr>
       <th scope="col">ID</th>
       <th scope="col">Codigo</th>
@@ -22,7 +22,7 @@
       <th scope="col">Cantidad</th>
       <th scope="col">Precio</th>
       <th scope="col">Caducidad</th>
-      <th scope="col">ID_Seccion</th>
+      <th scope="col">Seccion</th>
     </tr>
   </thead>
   <tbody>
@@ -34,7 +34,7 @@
 	      <td>${producto.cantidad}</td>
 	      <td>${producto.precio}</td>
 	      <td>${producto.caducidad}</td>
-	      <td>${producto.id_seccion}</td>
+	      <td>${producto.seccion.nombre}</td>
 	    </tr>
     </c:forEach>
   </tbody>
