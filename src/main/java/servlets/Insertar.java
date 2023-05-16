@@ -64,8 +64,8 @@ public class Insertar extends HttpServlet {
 		if(!existe) {
 			Date hoy = new Date();
 			boolean valido = cantidad>=0 && precio>=0 && caducidad.after(hoy) && request.getParameter("seccion") != null;
-			int seccion = Integer.parseInt(request.getParameter("seccion"));
 			if(valido) {
+					int seccion = Integer.parseInt(request.getParameter("seccion"));
 					mproducto.insertar(codigo, nombre, cantidad, precio, caducidad, seccion);
 					response.sendRedirect(request.getContextPath() + "/Inicio");
 			}else {
