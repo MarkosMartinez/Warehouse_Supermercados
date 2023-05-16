@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import modelo.DAO.ModeloProducto;
+import modelo.DAO.ModeloSeccion;
+import modelo.DTO.Seccion;
 
 /**
  * Servlet implementation class Insertar
@@ -31,6 +34,11 @@ public class Insertar extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ArrayList<Seccion> secciones = new ArrayList<>();
+		ModeloSeccion mseccion = new ModeloSeccion();
+		secciones = mseccion.getSecciones();
+		
+		request.setAttribute("secciones", secciones);
 		request.getRequestDispatcher("insert.jsp").forward(request, response);
 	}
 
@@ -41,6 +49,7 @@ public class Insertar extends HttpServlet {
 		int codigo = Integer.parseInt(request.getParameter("codigo"));
 		String nombre = request.getParameter("nombre");
 		int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+		int seccion = Integer.parseInt(request.getParameter("seccion"));
 		Double precio = Double.parseDouble(request.getParameter("precio"));
 		Date caducidad = null;
 		try {
@@ -50,7 +59,7 @@ public class Insertar extends HttpServlet {
 		}
 		ModeloProducto mproducto = new ModeloProducto();
 		
-		mproducto.insertar(codigo, nombre, cantidad, precio, caducidad);
+		mproducto.insertar(codigo, nombre, cantidad, precio, caducidad, seccion);
 		response.sendRedirect(request.getContextPath() + "/Inicio");
 	}
 

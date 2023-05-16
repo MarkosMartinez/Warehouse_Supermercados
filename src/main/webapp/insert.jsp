@@ -34,6 +34,15 @@
     <label for="caducidad" class="form-label">Caducidad</label>
     <input type="date" class="form-control" required="required" name="caducidad">
   </div>
+  <div class="mb-3">
+   <label for="seccion" class="form-label">Seccion</label>
+	  <select required="required" class="form-select" name="seccion">
+	  <c:forEach var="seccion" items="${secciones}">
+	  <option value="${seccion.id}">${seccion.nombre}</option>
+	  </c:forEach>
+	 </select>
+    
+  </div>
   <button type="submit" class="btn btn-primary">Insertar</button>
 </form>
 
