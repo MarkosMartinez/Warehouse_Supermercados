@@ -28,7 +28,7 @@
   </div>
   <div class="mb-3">
     <label for="precio" class="form-label">Precio</label>
-    <input type="number" class="form-control" required="required" name="precio">
+    <input type="number" step="any" class="form-control" required="required" name="precio">
   </div>
   <div class="mb-3">
     <label for="caducidad" class="form-label">Caducidad</label>
