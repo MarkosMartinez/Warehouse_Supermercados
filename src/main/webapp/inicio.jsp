@@ -39,6 +39,7 @@
     </c:forEach>
   </tbody>
 </table>
+<a href="Insertar" class="btn btn-primary">Insertar</a>
 
 </body>
 </html>
