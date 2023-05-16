@@ -63,6 +63,28 @@ public class ModeloProducto {
 		con.cerrar();
 		
 	}
+
+	public boolean comprobarCodigo(int codigo) {
+	    boolean existe = false;
+	    Conector con = new Conector();
+	    con.conectar();
+	    
+	    try {
+	        PreparedStatement pSt = con.getCon().prepareStatement("SELECT codigo FROM productos WHERE codigo = ?;");
+	        pSt.setInt(1, codigo);
+	        ResultSet resultado = pSt.executeQuery();
+	        if (resultado.next()) {
+	            existe = true;
+	        }
+	        pSt.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    con.cerrar();
+	    return existe;
+	}
+
 	
 	
 	

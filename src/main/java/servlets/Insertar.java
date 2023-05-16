@@ -49,7 +49,6 @@ public class Insertar extends HttpServlet {
 		int codigo = Integer.parseInt(request.getParameter("codigo"));
 		String nombre = request.getParameter("nombre");
 		int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-		int seccion = Integer.parseInt(request.getParameter("seccion"));
 		Double precio = Double.parseDouble(request.getParameter("precio"));
 		Date caducidad = null;
 		try {
@@ -58,9 +57,20 @@ public class Insertar extends HttpServlet {
 			e.printStackTrace();
 		}
 		ModeloProducto mproducto = new ModeloProducto();
-		
-		mproducto.insertar(codigo, nombre, cantidad, precio, caducidad, seccion);
-		response.sendRedirect(request.getContextPath() + "/Inicio");
+		boolean existe = mproducto.comprobarCodigo(codigo);
+		if(!existe) {
+			Date hoy = new Date();
+			boolean valido = cantidad>=0 && precio>=0 && caducidad.after(hoy) && request.getParameter("seccion") != null;
+			int seccion = Integer.parseInt(request.getParameter("seccion"));
+			if(valido) {
+					mproducto.insertar(codigo, nombre, cantidad, precio, caducidad, seccion);
+					response.sendRedirect(request.getContextPath() + "/Inicio");
+			}else {
+				response.sendRedirect(request.getContextPath() + "/Insertar?aviso=error");
+			}
+		}else {
+			response.sendRedirect(request.getContextPath() + "/Insertar?aviso=error");
+		}
 	}
 
 }
