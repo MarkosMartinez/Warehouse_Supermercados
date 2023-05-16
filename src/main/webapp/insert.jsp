@@ -11,6 +11,14 @@
 </head>
 <body>
 
+<c:if test="${aviso eq 'error'}">
+    <div class="alerta">
+		<div class="alert alert-danger" role="alert">
+		  Error! Eso no deberia de haber ocurrido.
+		</div>		  
+	</div>
+        </c:if>
+
 <h1>Insertar productos:</h1>
 
 <form action="Insertar" method="POST">

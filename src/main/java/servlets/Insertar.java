@@ -37,7 +37,10 @@ public class Insertar extends HttpServlet {
 		ArrayList<Seccion> secciones = new ArrayList<>();
 		ModeloSeccion mseccion = new ModeloSeccion();
 		secciones = mseccion.getSecciones();
+		String aviso = null;
+		aviso = request.getParameter("aviso");
 		
+		request.setAttribute("aviso", aviso);
 		request.setAttribute("secciones", secciones);
 		request.getRequestDispatcher("insert.jsp").forward(request, response);
 	}
