@@ -17,7 +17,7 @@
 		  Error! Eso no deberia de haber ocurrido.
 		</div>		  
 	</div>
-        </c:if>
+</c:if>
 
 <h1>Insertar productos:</h1>
 

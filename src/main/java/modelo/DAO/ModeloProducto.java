@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import modelo.DTO.Producto;
+import modelo.DTO.Seccion;
 
 public class ModeloProducto {
 	
@@ -83,6 +84,58 @@ public class ModeloProducto {
 	    
 	    con.cerrar();
 	    return existe;
+	}
+
+	public Producto getProducto(int id) {
+		 Conector con = new Conector();
+		 con.conectar();
+		 Producto producto = new Producto();
+		 Seccion seccion = new Seccion();
+		    
+		    try {
+		        PreparedStatement pSt = con.getCon().prepareStatement("SELECT * FROM productos WHERE id = ?;");
+		        pSt.setInt(1, id);
+		        ResultSet resultado = pSt.executeQuery();
+		        if (resultado.next()) {
+		        	producto.setId(id);
+		            producto.setCodigo(resultado.getInt("codigo"));
+		            producto.setNombre(resultado.getString("nombre"));
+		            producto.setCantidad(resultado.getInt("cantidad"));
+		            producto.setPrecio(resultado.getDouble("precio"));
+		            producto.setCaducidad(resultado.getDate("caducidad"));
+		            seccion.setId(resultado.getInt("id_seccion"));
+		            producto.setSeccion(seccion);
+		        }
+		        pSt.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    
+		con.cerrar();
+		return producto;
+	}
+
+	public void modificarProducto(Producto productoModificado) {
+		 Conector con = new Conector();
+		 con.conectar();
+		    
+		    try {
+		        PreparedStatement pSt = con.getCon().prepareStatement("UPDATE `productos` SET `codigo`= ?, `nombre`= ?, `cantidad`= ?, `precio`= ?, `caducidad`= ?, `id_seccion`= ? WHERE id = ?");
+		        pSt.setInt(1, productoModificado.getCodigo());
+		        pSt.setString(2, productoModificado.getNombre());
+		        pSt.setInt(3, productoModificado.getCantidad());
+		        pSt.setDouble(4, productoModificado.getPrecio());
+		        pSt.setDate(5, new java.sql.Date(productoModificado.getCaducidad().getTime()));
+		        pSt.setInt(6, productoModificado.getSeccion().getId());
+		        pSt.setInt(7, productoModificado.getId());
+		        pSt.execute();
+		        pSt.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    
+		con.cerrar();
+		
 	}
 
 	
