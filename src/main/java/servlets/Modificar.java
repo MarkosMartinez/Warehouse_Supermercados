@@ -86,7 +86,7 @@ public class Modificar extends HttpServlet {
 		
 		ModeloProducto mproducto = new ModeloProducto();
 		mproducto.modificarProducto(productoModificado);
-		response.sendRedirect(request.getContextPath() + "/Inicio");
+		response.sendRedirect(request.getContextPath() + "/Modificar?id=" + id);
 
 	}
 
