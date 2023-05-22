@@ -33,11 +33,9 @@ public class Inicio extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ModeloProducto mproducto = new ModeloProducto();
 		ArrayList<Producto> productos = mproducto.cargarProductos();
-		String busqueda = request.getParameter("buscar");
-		if(busqueda != null) {
-			busqueda = busqueda.toLowerCase();
-		}
+		String busqueda = request.getParameter("busqueda");
 		if (busqueda != null) {
+			busqueda = busqueda.toLowerCase();
 		    Iterator<Producto> iterator = productos.iterator();
 		    while (iterator.hasNext()) {
 		        Producto producto = iterator.next();
@@ -57,12 +55,7 @@ public class Inicio extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String busqueda = request.getParameter("busqueda");
-		if (busqueda != null && busqueda != "") {
-			response.sendRedirect(request.getContextPath() + "/Inicio?buscar=" + busqueda);
-		}else {
-			response.sendRedirect(request.getContextPath() + "/Inicio");
-		}
+		doGet(request, response);
 	}
 
 }
