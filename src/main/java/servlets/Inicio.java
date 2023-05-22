@@ -32,6 +32,20 @@ public class Inicio extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ModeloProducto mproducto = new ModeloProducto();
 		ArrayList<Producto> productos = mproducto.cargarProductos();
+		String busqueda = request.getParameter("buscar");
+		if(busqueda != null) {
+			busqueda = busqueda.toLowerCase();
+		}
+		if(busqueda != null) {
+			for (int i = 0; i < productos.size(); i++) {
+				String idString = "";
+				idString += productos.get(i).getId();
+				if(!productos.get(i).getNombre().toLowerCase().contains(busqueda) && !idString.contains(busqueda)) {
+					productos.remove(i);
+					i--;
+				}
+			}
+		}
 		
 		request.setAttribute("productos", productos);
 		request.getRequestDispatcher("inicio.jsp").forward(request, response);
@@ -41,7 +55,12 @@ public class Inicio extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		String busqueda = request.getParameter("busqueda");
+		if (busqueda != null && busqueda != "") {
+			response.sendRedirect(request.getContextPath() + "/Inicio?buscar=" + busqueda);
+		}else {
+			response.sendRedirect(request.getContextPath() + "/Inicio");
+		}
 	}
 
 }

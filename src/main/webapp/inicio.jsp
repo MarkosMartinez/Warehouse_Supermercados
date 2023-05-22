@@ -11,6 +11,13 @@
 </head>
 <body>
 
+<form action="Inicio" method="POST">
+<div class="input-group">
+  <input type="search" class="form-control rounded" placeholder="Buscar" aria-label="Buscar" name="busqueda" aria-describedby="search-addon" />
+  <button type="submit" class="btn btn-outline-primary">Buscar</button>
+</div>
+</form>
+
 <h1>Lista de productos:</h1>
 
 <table class="table">
