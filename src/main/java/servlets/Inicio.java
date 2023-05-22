@@ -41,8 +41,8 @@ public class Inicio extends HttpServlet {
 		    Iterator<Producto> iterator = productos.iterator();
 		    while (iterator.hasNext()) {
 		        Producto producto = iterator.next();
-		        String idString = String.valueOf(producto.getId());
-		        if (!producto.getNombre().toLowerCase().contains(busqueda) && !idString.contains(busqueda)) {
+		        String codigoString = String.valueOf(producto.getCodigo());
+		        if (!producto.getNombre().toLowerCase().contains(busqueda) && !codigoString.contains(busqueda)) {
 		            iterator.remove();
 		        }
 		    }
