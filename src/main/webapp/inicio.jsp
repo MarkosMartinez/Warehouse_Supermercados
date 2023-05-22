@@ -13,6 +13,13 @@
 
 <form action="Inicio" method="POST">
 <div class="input-group">
+  <input type="number" class="form-control rounded" placeholder="min" aria-label="min" name="min"/>
+  <input type="number" class="form-control rounded" placeholder="max" aria-label="max" name="max"/>
+  <button type="submit" class="btn btn-outline-primary">Filtrar</button>
+</div>
+</form>
+<form action="Inicio" method="POST">
+<div class="input-group">
   <input type="search" class="form-control rounded" placeholder="Buscar" aria-label="Buscar" name="busqueda" aria-describedby="search-addon" />
   <button type="submit" class="btn btn-outline-primary">Buscar</button>
 </div>

@@ -34,6 +34,12 @@ public class Inicio extends HttpServlet {
 		ModeloProducto mproducto = new ModeloProducto();
 		ArrayList<Producto> productos = mproducto.cargarProductos();
 		String busqueda = request.getParameter("busqueda");
+		double min = 0;
+		if(request.getParameter("min") != null && request.getParameter("min") != "")
+			min = Integer.parseInt(request.getParameter("min"));
+		double max = Double.POSITIVE_INFINITY;
+		if(request.getParameter("max") != null && request.getParameter("max") != "")
+			max = Integer.parseInt(request.getParameter("max"));
 		if (busqueda != null) {
 			busqueda = busqueda.toLowerCase();
 		    Iterator<Producto> iterator = productos.iterator();
@@ -45,6 +51,15 @@ public class Inicio extends HttpServlet {
 		        }
 		    }
 		}
+		
+		    Iterator<Producto> iterator = productos.iterator();
+		    while (iterator.hasNext()) {
+		        Producto producto = iterator.next();
+		        if (producto.getPrecio() < min || producto.getPrecio() > max) {
+		            iterator.remove();
+		        }
+		    }
+		
 
 		
 		request.setAttribute("productos", productos);
