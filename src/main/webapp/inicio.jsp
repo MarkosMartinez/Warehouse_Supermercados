@@ -31,6 +31,7 @@
       <th scope="col">Caducidad</th>
       <th scope="col">Seccion</th>
       <th scope="col">Modificar</th>
+      <th scope="col">Eliminar</th>
     </tr>
   </thead>
   <tbody>
@@ -44,6 +45,7 @@
 	      <td>${producto.caducidad}</td>
 	      <td>${producto.seccion.nombre}</td>
 	      <td><a href="Modificar?id=${producto.id}" class="btn btn-primary">Editar</a></td>
+	      <td><a href="Eliminar?id=${producto.id}" class="btn btn-danger">Eliminar</a></td>
 	    </tr>
     </c:forEach>
   </tbody>

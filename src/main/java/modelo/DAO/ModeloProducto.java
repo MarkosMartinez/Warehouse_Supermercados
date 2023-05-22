@@ -138,6 +138,22 @@ public class ModeloProducto {
 		
 	}
 
+	public void eliminarProducto(int id) {
+		 Conector con = new Conector();
+		 con.conectar();
+		    
+		    try {
+		        PreparedStatement pStEliminar = con.getCon().prepareStatement("DELETE FROM `productos` WHERE id = ?");
+		        pStEliminar.setInt(1, id);
+		        pStEliminar.execute();
+		        pStEliminar.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    
+		con.cerrar();
+	}
+
 	
 	
 	
