@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,16 +37,17 @@ public class Inicio extends HttpServlet {
 		if(busqueda != null) {
 			busqueda = busqueda.toLowerCase();
 		}
-		if(busqueda != null) {
-			for (int i = 0; i < productos.size(); i++) {
-				String idString = "";
-				idString += productos.get(i).getId();
-				if(!productos.get(i).getNombre().toLowerCase().contains(busqueda) && !idString.contains(busqueda)) {
-					productos.remove(i);
-					i--;
-				}
-			}
+		if (busqueda != null) {
+		    Iterator<Producto> iterator = productos.iterator();
+		    while (iterator.hasNext()) {
+		        Producto producto = iterator.next();
+		        String idString = String.valueOf(producto.getId());
+		        if (!producto.getNombre().toLowerCase().contains(busqueda) && !idString.contains(busqueda)) {
+		            iterator.remove();
+		        }
+		    }
 		}
+
 		
 		request.setAttribute("productos", productos);
 		request.getRequestDispatcher("inicio.jsp").forward(request, response);
