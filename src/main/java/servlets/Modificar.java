@@ -55,7 +55,7 @@ public class Modificar extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		int codigo = Integer.parseInt(request.getParameter("codigo"));
+		String codigo = request.getParameter("codigo");
 		String nombre = request.getParameter("nombre");
 		int cantidad = Integer.parseInt(request.getParameter("cantidad"));
 		Double precio = Double.parseDouble(request.getParameter("precio"));

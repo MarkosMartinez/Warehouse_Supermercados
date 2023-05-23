@@ -27,7 +27,7 @@ public class ModeloProducto {
 			while(resultado.next()) {
 				Producto producto = new Producto();
 				producto.setId(resultado.getInt("id"));
-				producto.setCodigo(resultado.getInt("codigo"));
+				producto.setCodigo(resultado.getString("codigo"));
 				producto.setNombre(resultado.getString("nombre"));
 				producto.setCantidad(resultado.getInt("cantidad"));
 				producto.setPrecio(resultado.getDouble("precio"));
@@ -98,7 +98,7 @@ public class ModeloProducto {
 		        ResultSet resultado = pSt.executeQuery();
 		        if (resultado.next()) {
 		        	producto.setId(id);
-		            producto.setCodigo(resultado.getInt("codigo"));
+		            producto.setCodigo(resultado.getString("codigo"));
 		            producto.setNombre(resultado.getString("nombre"));
 		            producto.setCantidad(resultado.getInt("cantidad"));
 		            producto.setPrecio(resultado.getDouble("precio"));
@@ -121,7 +121,7 @@ public class ModeloProducto {
 		    
 		    try {
 		        PreparedStatement pSt = con.getCon().prepareStatement("UPDATE `productos` SET `codigo`= ?, `nombre`= ?, `cantidad`= ?, `precio`= ?, `caducidad`= ?, `id_seccion`= ? WHERE id = ?");
-		        pSt.setInt(1, productoModificado.getCodigo());
+		        pSt.setString(1, productoModificado.getCodigo());
 		        pSt.setString(2, productoModificado.getNombre());
 		        pSt.setInt(3, productoModificado.getCantidad());
 		        pSt.setDouble(4, productoModificado.getPrecio());

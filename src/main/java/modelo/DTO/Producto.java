@@ -5,7 +5,7 @@ import java.util.Date;
 public class Producto {
 	
 	private int id;
-	private int codigo;
+	private String codigo;
 	private String nombre;
 	private int cantidad;
 	private double precio;
@@ -20,10 +20,10 @@ public class Producto {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(int codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 	public String getNombre() {
