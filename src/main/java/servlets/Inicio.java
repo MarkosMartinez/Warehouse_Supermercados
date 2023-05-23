@@ -2,6 +2,8 @@ package servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 
 import javax.servlet.ServletException;
@@ -59,9 +61,25 @@ public class Inicio extends HttpServlet {
 		            iterator.remove();
 		        }
 		    }
+		    
+		String orden = request.getParameter("codOrden");
 		
+		if (orden != null && (orden.equalsIgnoreCase("asc") || orden.equalsIgnoreCase("desc"))) {
+	        Comparator<Producto> codigoComparator = new Comparator<Producto>() {
+	            public int compare(Producto p1, Producto p2) {
+	                return p1.getCodigo().compareTo(p2.getCodigo());
+	            }
+	        };
 
+	        if (orden.equals("asc")) {
+	            Collections.sort(productos, codigoComparator);
+	        } else {
+	            Collections.sort(productos, Collections.reverseOrder(codigoComparator));
+	        }
+	    }
 		
+		
+		request.setAttribute("orden", orden);
 		request.setAttribute("productos", productos);
 		request.getRequestDispatcher("inicio.jsp").forward(request, response);
 	}

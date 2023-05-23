@@ -31,7 +31,15 @@
   <thead class="table-light">
     <tr>
       <th scope="col">ID</th>
-      <th scope="col">Codigo</th>
+      <c:if test="${orden eq 'asc'}">
+        	<th scope="col"><a style="text-decoration: none;color: black" href="Inicio?codOrden=desc">Codigo ⬆</a></th>
+      </c:if>
+      <c:if test="${orden eq 'desc'}">
+        	<th scope="col"><a style="text-decoration: none;color: black" href="Inicio?codOrden=asc">Codigo ⬇</a></th>
+      </c:if>
+      <c:if test="${(orden ne 'desc' && tipoLogin ne 'asc') || orden eq null}">
+        	<th scope="col"><a style="text-decoration: none;color: black" href="Inicio?codOrden=desc">Codigo</a></th>
+      </c:if>
       <th scope="col">Nombre</th>
       <th scope="col">Cantidad</th>
       <th scope="col">Precio</th>
