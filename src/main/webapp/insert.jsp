@@ -49,7 +49,13 @@
 	  <option value="${seccion.id}">${seccion.nombre}</option>
 	  </c:forEach>
 	 </select>
-    
+  </div>
+  <div class="mb-3">
+   <label for="supermercado" class="form-label">Supermercados:</label> <br>
+	  <c:forEach var="supermercado" items="${supermercados}">
+	  	<input class="form-check-input" type="checkbox" value="${supermercado.id}" id="${supermercado.id}" name="supermercados">
+		<label class="form-check-label" for="${supermercado.id}">${supermercado.nombre}</label>
+	  </c:forEach>
   </div>
   <button type="submit" class="btn btn-primary">Insertar</button>
 </form>

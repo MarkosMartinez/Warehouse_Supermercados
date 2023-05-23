@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import modelo.DAO.ModeloProducto;
 import modelo.DAO.ModeloSeccion;
+import modelo.DAO.ModeloSupermercado;
 import modelo.DTO.Seccion;
+import modelo.DTO.Supermercado;
 
 /**
  * Servlet implementation class Insertar
@@ -37,9 +39,13 @@ public class Insertar extends HttpServlet {
 		ArrayList<Seccion> secciones = new ArrayList<>();
 		ModeloSeccion mseccion = new ModeloSeccion();
 		secciones = mseccion.getSecciones();
+		ModeloSupermercado msupermercado = new ModeloSupermercado();
+		ArrayList<Supermercado> supermercados = new ArrayList<>();
+		supermercados = msupermercado.cargarSupermercados();
 		String aviso = null;
 		aviso = request.getParameter("aviso");
 		
+		request.setAttribute("supermercados", supermercados);
 		request.setAttribute("aviso", aviso);
 		request.setAttribute("secciones", secciones);
 		request.getRequestDispatcher("insert.jsp").forward(request, response);
@@ -49,11 +55,12 @@ public class Insertar extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int codigo = Integer.parseInt(request.getParameter("codigo"));
+		String codigo = request.getParameter("codigo");
 		String nombre = request.getParameter("nombre");
 		int cantidad = Integer.parseInt(request.getParameter("cantidad"));
 		Double precio = Double.parseDouble(request.getParameter("precio"));
 		Date caducidad = null;
+		String[] supermercados = request.getParameterValues("supermercados");
 		
 		//Aplicando formato a la fecha de caducidad
 		try {
@@ -73,6 +80,11 @@ public class Insertar extends HttpServlet {
 			if(valido) {
 					int seccion = Integer.parseInt(request.getParameter("seccion"));
 					mproducto.insertar(codigo, nombre, cantidad, precio, caducidad, seccion);
+					ModeloSupermercado msupermercado = new ModeloSupermercado();
+					int idProducto = mproducto.getIdProductoPorCodigo(codigo);
+					for (String idsupermercado : supermercados) {
+					msupermercado.insertarProducto(idProducto, Integer.parseInt(idsupermercado));
+					}
 					response.sendRedirect(request.getContextPath() + "/Inicio");
 			}else {
 				response.sendRedirect(request.getContextPath() + "/Insertar?aviso=error");
