@@ -54,13 +54,19 @@ public class Insertar extends HttpServlet {
 		int cantidad = Integer.parseInt(request.getParameter("cantidad"));
 		Double precio = Double.parseDouble(request.getParameter("precio"));
 		Date caducidad = null;
+		
+		//Aplicando formato a la fecha de caducidad
 		try {
 			caducidad = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("caducidad"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		ModeloProducto mproducto = new ModeloProducto();
+		
+		//Comprobar si el codigo del producto ya existe
 		boolean existe = mproducto.comprobarCodigo(codigo);
+		
+		//Si no lo existe comprueba si es valido y lo inserta
 		if(!existe) {
 			Date hoy = new Date();
 			boolean valido = cantidad>=0 && precio>=0 && caducidad.after(hoy) && request.getParameter("seccion") != null;

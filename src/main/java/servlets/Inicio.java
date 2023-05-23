@@ -42,6 +42,8 @@ public class Inicio extends HttpServlet {
 		double max = Double.POSITIVE_INFINITY;
 		if(request.getParameter("max") != null && request.getParameter("max") != "")
 			max = Integer.parseInt(request.getParameter("max"));
+		
+		//Para aplicar el filtro de busqueda
 		if (busqueda != null) {
 			busqueda = busqueda.toLowerCase();
 		    Iterator<Producto> iterator = productos.iterator();
@@ -54,14 +56,16 @@ public class Inicio extends HttpServlet {
 		    }
 		}
 		
-		    Iterator<Producto> iterator = productos.iterator();
-		    while (iterator.hasNext()) {
-		        Producto producto = iterator.next();
-		        if (producto.getPrecio() < min || producto.getPrecio() > max) {
-		            iterator.remove();
-		        }
-		    }
+		//Para aplicar el filtro de precio maximo / minimo
+	    Iterator<Producto> iterator = productos.iterator();
+	    while (iterator.hasNext()) {
+	        Producto producto = iterator.next();
+	        if (producto.getPrecio() < min || producto.getPrecio() > max) {
+	            iterator.remove();
+	        }
+	    }
 		    
+		//Para ordenar el codigo
 		String orden = request.getParameter("codOrden");
 		
 		if (orden != null && (orden.equalsIgnoreCase("asc") || orden.equalsIgnoreCase("desc"))) {
@@ -73,7 +77,7 @@ public class Inicio extends HttpServlet {
 
 	        if (orden.equals("asc")) {
 	            Collections.sort(productos, codigoComparator);
-	        } else {
+	        } else if (orden.equals("desc")){
 	            Collections.sort(productos, Collections.reverseOrder(codigoComparator));
 	        }
 	    }

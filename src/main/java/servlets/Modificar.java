@@ -73,6 +73,7 @@ public class Modificar extends HttpServlet {
 		Seccion seccion = new Seccion();
 		seccion.setId(idSeccion);
 		
+		//Especificando el producto ya modicidado
 		Producto productoModificado = new Producto();
 		productoModificado.setId(id);
 		productoModificado.setCodigo(codigo);
