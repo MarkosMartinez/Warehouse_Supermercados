@@ -54,6 +54,8 @@ public class Modificar extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//Obteniendo los datos del producto modificado
 		int id = Integer.parseInt(request.getParameter("id"));
 		String codigo = request.getParameter("codigo");
 		String nombre = request.getParameter("nombre");
@@ -63,6 +65,7 @@ public class Modificar extends HttpServlet {
 		String fechaSinFormato = request.getParameter("caducidad");
 		int idSeccion = Integer.parseInt(request.getParameter("seccion"));
 		
+		//Poniendole un formato a la fecha
 		try {
 			fechaCaducidad = new SimpleDateFormat("yyyy-MM-dd").parse(fechaSinFormato);
 		} catch (ParseException e) {
@@ -73,7 +76,7 @@ public class Modificar extends HttpServlet {
 		Seccion seccion = new Seccion();
 		seccion.setId(idSeccion);
 		
-		//Especificando el producto ya modicidado
+		//Especificando el producto ya modifidado
 		Producto productoModificado = new Producto();
 		productoModificado.setId(id);
 		productoModificado.setCodigo(codigo);
@@ -82,7 +85,6 @@ public class Modificar extends HttpServlet {
 		productoModificado.setPrecio(precio);
 		productoModificado.setCaducidad(fechaCaducidad);
 		productoModificado.setSeccion(seccion);
-		
 		
 		
 		ModeloProducto mproducto = new ModeloProducto();

@@ -32,13 +32,18 @@ public class Eliminar extends HttpServlet {
 		int id; 
 		if(request.getParameter("id") != null) {
 			id = Integer.parseInt(request.getParameter("id"));
+			
 			ModeloProducto mproducto = new ModeloProducto();
 			ModeloSupermercado msupermercado = new ModeloSupermercado();
+			
 			int cantidad = mproducto.getCantidad(id);
+
+			// Si la cantidad es menor o igual a 0, eliminara el producto y las relaciones, sino quitara 1 al stock
 			if(cantidad <= 0) {
 				boolean existe = msupermercado.comprobarProducto(id);
+				//Si existe algun producto en el supermercado primero eliminara el producto del supermercado, sino eliminara el producto completamente.
 				if(!existe) {
-				mproducto.eliminarProducto(id);
+					mproducto.eliminarProducto(id);
 				}else {
 					msupermercado.eliminarProductoDeSupermercados(id);
 				}
