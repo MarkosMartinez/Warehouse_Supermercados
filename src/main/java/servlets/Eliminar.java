@@ -34,11 +34,16 @@ public class Eliminar extends HttpServlet {
 			id = Integer.parseInt(request.getParameter("id"));
 			ModeloProducto mproducto = new ModeloProducto();
 			ModeloSupermercado msupermercado = new ModeloSupermercado();
-			boolean existe = msupermercado.comprobarProducto(id);
-			if(!existe) {
-			mproducto.eliminarProducto(id);
+			int cantidad = mproducto.getCantidad(id);
+			if(cantidad <= 0) {
+				boolean existe = msupermercado.comprobarProducto(id);
+				if(!existe) {
+				mproducto.eliminarProducto(id);
+				}else {
+					msupermercado.eliminarProductoDeSupermercados(id);
+				}
 			}else {
-				msupermercado.eliminarProductoDeSupermercados(id);
+				mproducto.eliminarStock(id);
 			}
 		}
 		response.sendRedirect(request.getContextPath() + "/Inicio");

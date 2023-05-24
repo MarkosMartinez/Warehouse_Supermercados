@@ -175,6 +175,44 @@ public class ModeloProducto {
 		return idProducto;
 	}
 
+	public int getCantidad(int id) {
+		Conector con = new Conector();
+		 con.conectar();
+		 int cantidad = 0;
+		    
+		    try {
+		        PreparedStatement pSt = con.getCon().prepareStatement("SELECT cantidad FROM productos WHERE id = ?;");
+		        pSt.setInt(1, id);
+		        ResultSet resultado = pSt.executeQuery();
+		        while(resultado.next()) {
+		        	cantidad =  resultado.getInt("cantidad");
+		        }
+		        pSt.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    
+		con.cerrar();
+		return cantidad;
+	}
+
+	public void eliminarStock(int id) {
+		Conector con = new Conector();
+		 con.conectar();
+		    
+		    try {
+		        PreparedStatement pSt = con.getCon().prepareStatement("UPDATE `productos` SET `cantidad`= cantidad -1 WHERE id = ?");
+		        pSt.setInt(1, id);
+		        pSt.execute();
+		        pSt.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    
+		con.cerrar();
+		
+	}
+
 	
 	
 }
