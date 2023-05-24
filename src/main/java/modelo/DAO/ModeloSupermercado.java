@@ -54,4 +54,42 @@ public class ModeloSupermercado {
 		
 	}
 
+	public boolean comprobarProducto(int id) {
+		boolean existe = false;
+		Conector con = new Conector();
+		con.conectar();
+		
+		try {
+			PreparedStatement pSt = con.getCon().prepareStatement("SELECT * FROM productos_supermercados WHERE id_producto = ?;");
+			pSt.setInt(1, id);
+			ResultSet resultado = pSt.executeQuery();
+			if(resultado.next()) {
+				existe = true;
+			}
+			pSt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		con.cerrar();
+		return existe;
+	}
+	
+	public void eliminarProductoDeSupermercados(int id) {
+		Conector con = new Conector();
+		 con.conectar();
+		    
+		    try {
+		        PreparedStatement pStEliminar = con.getCon().prepareStatement("DELETE FROM `productos_supermercados` WHERE id_producto = ?");
+		        pStEliminar.setInt(1, id);
+		        pStEliminar.execute();
+		        pStEliminar.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    
+		con.cerrar();
+	}
+
+
 }

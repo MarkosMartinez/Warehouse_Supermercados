@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import modelo.DAO.ModeloProducto;
+import modelo.DAO.ModeloSupermercado;
 
 /**
  * Servlet implementation class Eliminar
@@ -32,7 +33,13 @@ public class Eliminar extends HttpServlet {
 		if(request.getParameter("id") != null) {
 			id = Integer.parseInt(request.getParameter("id"));
 			ModeloProducto mproducto = new ModeloProducto();
+			ModeloSupermercado msupermercado = new ModeloSupermercado();
+			boolean existe = msupermercado.comprobarProducto(id);
+			if(!existe) {
 			mproducto.eliminarProducto(id);
+			}else {
+				msupermercado.eliminarProductoDeSupermercados(id);
+			}
 		}
 		response.sendRedirect(request.getContextPath() + "/Inicio");
 	}
