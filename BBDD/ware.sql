@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-05-2023 a las 13:51:59
+-- Tiempo de generación: 25-05-2023 a las 12:16:24
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -42,14 +42,16 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `codigo`, `nombre`, `cantidad`, `precio`, `caducidad`, `id_seccion`) VALUES
-(4, '4444', 'proba4', 324, 23, '2022-03-07', 2),
+(4, '4445', 'proba5', 325, 25, '2022-03-08', 2),
 (5, '5555', 'prod5', 10, 65.5, '2023-03-16', 4),
 (10, '666', 'proba6', 66, 66.5, '2023-03-16', 1),
 (12, '0897', 'proba8', 32, 2, '1909-12-03', 4),
 (13, '9999', 'proba9', 23, 23, '2019-12-16', 1),
 (18, '1010', 'proba10', 10, 10, NULL, 3),
 (19, '1100', 'proba11', 222, 11.1, NULL, 2),
-(20, '1222', 'producto12', 12, 12, NULL, 4);
+(20, '1222', 'producto12', 12, 12, NULL, 4),
+(21, '4', 'Prueba', 33, 33, '2023-05-19', NULL),
+(22, '5', 'PruebaConSeccion', 33, 33, '2023-05-17', 2);
 
 -- --------------------------------------------------------
 
@@ -144,13 +146,13 @@ ALTER TABLE `supermercados`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `productos_supermercados`
 --
 ALTER TABLE `productos_supermercados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `secciones`

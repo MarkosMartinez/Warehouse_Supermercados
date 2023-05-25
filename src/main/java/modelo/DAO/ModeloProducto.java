@@ -213,6 +213,22 @@ public class ModeloProducto {
 		
 	}
 
+	public void eliminarProductoPorCodigo(String codigo) {
+		Conector con = new Conector();
+		 con.conectar();
+		    
+		    try {
+		        PreparedStatement pStEliminar = con.getCon().prepareStatement("DELETE FROM `productos` WHERE codigo = ?");
+		        pStEliminar.setString(1, codigo);
+		        pStEliminar.execute();
+		        pStEliminar.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    
+		con.cerrar();
+	}
+
 	
 	
 }

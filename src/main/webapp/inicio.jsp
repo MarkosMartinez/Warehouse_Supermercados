@@ -67,5 +67,12 @@
 </table>
 <a href="Insertar" class="btn btn-primary">Insertar</a>
 
+<form action="Inicio" method="POST">
+<div class="input-group">
+  <input type="text" class="form-control rounded" name="multidelete" placeholder="Ej: 14, 15, 33"/>
+  <button type="submit" class="btn btn-outline-primary">Eliminar multiple</button>
+</div>
+</form>
+
 </body>
 </html>
