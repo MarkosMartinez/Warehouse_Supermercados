@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import modelo.DAO.ModeloProducto;
+import modelo.DAO.ModeloSeccion;
 import modelo.DTO.Producto;
 import modelo.DTO.Seccion;
 
@@ -36,10 +38,14 @@ public class Modificar extends HttpServlet {
 		String id = null;
 		id = request.getParameter("id");
 		if(id != null) {
+			ArrayList<Seccion> secciones = new ArrayList<>();
+			ModeloSeccion mseccion = new ModeloSeccion();
+			secciones = mseccion.getSecciones();
 			ModeloProducto mproducto = new ModeloProducto();
 			Producto producto = new Producto();
 			producto = mproducto.getProducto(Integer.parseInt(id));
 			if(producto.getId() != -1) {
+			request.setAttribute("secciones", secciones);
 			request.setAttribute("producto", producto);
 			request.getRequestDispatcher("modificar.jsp").forward(request, response);
 			}else {

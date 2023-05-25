@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +40,16 @@
   </div>
   <div class="mb-3">
    <label for="seccion" class="form-label">Seccion</label>
-	  <input type="number" class="form-control" required="required" value="${producto.seccion.id}" name="seccion">
+	  <select required="required" class="form-select" name="seccion">
+	  <c:forEach var="seccion" items="${secciones}">
+	    <c:if test="${seccion.id eq producto.seccion.id}">
+	 	 <option selected="selected" value="${seccion.id}">${seccion.nombre}</option>
+	 	</c:if>
+	 	<c:if test="${seccion.id ne producto.seccion.id}">
+	 	 <option value="${seccion.id}">${seccion.nombre}</option>
+	 	</c:if>
+	  </c:forEach>
+	 </select>
   </div>
   <button type="submit" class="btn btn-primary">Modificar</button>
 </form>
