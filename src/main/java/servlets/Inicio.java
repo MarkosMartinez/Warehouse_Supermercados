@@ -85,16 +85,16 @@ public class Inicio extends HttpServlet {
 		//Para eliminar multiple
 		if(request.getParameter("multidelete") != null && request.getParameter("multidelete") != "") {
 			boolean valido = true;
-			String[] codigoAEliminar = request.getParameter("multidelete").split(",");
+			String[] codigoAEliminar = request.getParameter("multidelete").replaceAll("\\s+","").split(",");
 			for (String codigo : codigoAEliminar) {
 				if(valido) {
 					valido = mproducto.comprobarCodigo(codigo);
-					productos = mproducto.cargarProductos();
 				}
 			}
 			if(valido) {
 				for (String codigo : codigoAEliminar) {
 					mproducto.eliminarProductoPorCodigo(codigo);
+					productos = mproducto.cargarProductos();
 				}
 			}
 		}
