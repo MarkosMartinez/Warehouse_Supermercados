@@ -27,9 +27,12 @@
 
 <h1>Lista de productos:</h1>
 
+<c:set var="cant" value="0" />
+<form action="Inicio" method="POST">
 <table class="table">
   <thead class="table-light">
     <tr>
+      <th scope="col">Eliminado Multiple</th>
       <th scope="col">ID</th>
       <c:if test="${orden eq 'asc'}">
         	<th scope="col"><a style="text-decoration: none;color: black" href="Inicio?codOrden=desc">Codigo ⬆</a></th>
@@ -50,8 +53,11 @@
     </tr>
   </thead>
   <tbody>
+  
    <c:forEach var="producto" items="${productos}">
+   <c:set var="cant" value="${cant + 1}" />
 	    <tr>
+	      <td><input class="form-check-input" type="checkbox" value="${producto.id}" name="mdc-${cant}"></td>
 	      <td>${producto.id}</td>
 	      <td>${producto.codigo}</td>
 	      <td>${producto.nombre}</td>
@@ -65,9 +71,12 @@
     </c:forEach>
   </tbody>
 </table>
-<a href="Insertar" class="btn btn-primary">Insertar</a>
+  <button type="submit" class="btn btn-warning">Eliminar multiple</button>
+  <a href="Insertar" class="btn btn-primary">Insertar</a>
+</form>
 
-<form action="Inicio" method="POST">
+
+<form style="margin-top: 10px" action="Inicio" method="POST">
 <div class="input-group">
   <input type="text" class="form-control rounded" name="multidelete" placeholder="Ej: 14, 15, 33"/>
   <button type="submit" class="btn btn-outline-primary">Eliminar multiple</button>

@@ -82,7 +82,7 @@ public class Inicio extends HttpServlet {
 	        }
 	    }
 		
-		//Para eliminar multiple
+		//Para eliminar multiple (campo de texto)
 		if(request.getParameter("multidelete") != null && request.getParameter("multidelete") != "") {
 			boolean valido = true;
 			String[] codigoAEliminar = request.getParameter("multidelete").replaceAll("\\s+","").split(",");
@@ -94,10 +94,19 @@ public class Inicio extends HttpServlet {
 			if(valido) {
 				for (String codigo : codigoAEliminar) {
 					mproducto.eliminarProductoPorCodigo(codigo);
-					productos = mproducto.cargarProductos();
 				}
 			}
 		}
+		
+		
+		//Para eliminado multiple desde checkbox
+		for (int i = 1; i < productos.size(); i++) {
+			if(request.getParameter("mdc-" + i) != null) {
+				mproducto.eliminarProducto(Integer.parseInt(request.getParameter("mdc-" + i)));
+			}
+			
+		}
+		productos = mproducto.cargarProductos();
 		
 		
 		request.setAttribute("orden", orden);
