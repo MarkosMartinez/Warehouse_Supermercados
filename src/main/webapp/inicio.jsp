@@ -16,18 +16,18 @@
 <div class="input-group">
   <input type="number" class="form-control rounded" placeholder="min" aria-label="min" name="min"/>
   <input type="number" class="form-control rounded" placeholder="max" aria-label="max" name="max"/>
-  <button type="submit" class="btn btn-outline-primary">Filtrar</button>
+  <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-filter"></i></button>
 </div>
 </form>
 <form action="Inicio" method="POST">
 <div class="input-group">
   <input type="search" class="form-control rounded" placeholder="Buscar" aria-label="Buscar" name="busqueda" aria-describedby="search-addon" />
-  <button type="submit" class="btn btn-outline-primary">Buscar</button>
+  <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
 </div>
 </form>
 
 <div class="carrito">
-<a href="Carrito?id=${producto.id}" style="position: absolute; right: 5px; margin-top: 5px" class="btn btn-success"><i class="fa-solid fa-cart-shopping"></i> ${carrito}</a>
+<a href="#" style="position: absolute; right: 5px; margin-top: 5px" class="btn btn-success"><i class="fa-solid fa-cart-shopping"></i> ${carrito}</a>
 </div>
 
 <h1>Lista de productos:</h1>
