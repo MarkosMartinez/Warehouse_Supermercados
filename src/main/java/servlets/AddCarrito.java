@@ -1,4 +1,4 @@
-package modelo.DAO;
+package servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,19 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import modelo.DAO.ModeloProducto;
 import modelo.DTO.Producto;
 
 /**
- * Servlet implementation class Carrito
+ * Servlet implementation class Comprar
  */
-@WebServlet("/Carrito")
-public class Carrito extends HttpServlet {
+@WebServlet("/AddCarrito")
+public class AddCarrito extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Carrito() {
+    public AddCarrito() {
         super();
     }
 
@@ -30,20 +31,26 @@ public class Carrito extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		ArrayList<Producto> carrito = new ArrayList();
-		if((ArrayList<Producto>) session.getAttribute("carrito") != null) {
+		String idString = request.getParameter("id");
+		if(idString != null) {
+			int id = Integer.parseInt(idString);
+			Producto producto = new Producto();
+			ModeloProducto mproducto = new ModeloProducto();
+			producto = mproducto.getProducto(id);
+			HttpSession session = request.getSession();
+			ArrayList<Producto> carrito = new ArrayList();
+			
+			//Si el carrito, desde el login, esta vacio, omite el get.
+			if((ArrayList<Producto>) session.getAttribute("carrito") != null) {
 			carrito = (ArrayList<Producto>) session.getAttribute("carrito");
-			if(carrito.size() > 0) {
-				
-			request.setAttribute("carrito", carrito);
-			request.getRequestDispatcher("carrito.jsp").forward(request, response);
-			}else{
-				response.sendRedirect(request.getContextPath() + "/Inicio");
 			}
-			}else {
-				response.sendRedirect(request.getContextPath() + "/Inicio");
-			}
+			
+			carrito.add(producto);
+			session.setAttribute("carrito", carrito);
+			response.sendRedirect(request.getContextPath() + "/Inicio");
+		}else {
+			response.sendRedirect(request.getContextPath() + "/Inicio");
+		}
 	}
 
 	/**

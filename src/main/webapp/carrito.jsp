@@ -34,7 +34,7 @@
     </c:forEach>
   </tbody>
 </table>
-<a href="#" class="btn btn-primary">Finalizar la Compra</a>
+<a href="Eliminar?id=-1" class="btn btn-primary">Finalizar la Compra</a>
 
 </body>
 </html>
