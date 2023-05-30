@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Inicio</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"rel="stylesheet"/>
 </head>
 <body>
 
@@ -24,6 +25,10 @@
   <button type="submit" class="btn btn-outline-primary">Buscar</button>
 </div>
 </form>
+
+<div class="carrito">
+<a href="Carrito?id=${producto.id}" style="position: absolute; right: 5px; margin-top: 5px" class="btn btn-success"><i class="fa-solid fa-cart-shopping"></i> ${carrito}</a>
+</div>
 
 <h1>Lista de productos:</h1>
 
@@ -50,6 +55,7 @@
       <th scope="col">Seccion</th>
       <th scope="col">Modificar</th>
       <th scope="col">Eliminar</th>
+      <th scope="col">Comprar</th>
     </tr>
   </thead>
   <tbody>
@@ -65,14 +71,15 @@
 	      <td>${producto.precio}</td>
 	      <td>${producto.caducidad}</td>
 	      <td>${producto.seccion.nombre}</td>
-	      <td><a href="Modificar?id=${producto.id}" class="btn btn-primary">Editar</a></td>
-	      <td><a href="Eliminar?id=${producto.id}" class="btn btn-danger">Eliminar</a></td>
+	      <td><a href="Modificar?id=${producto.id}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a></td>
+	      <td><a href="Eliminar?id=${producto.id}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a></td>
+	      <td><a href="AddCarrito?id=${producto.id}" class="btn btn-success"><i class="fa-solid fa-cart-plus"></i></a></td>
 	    </tr>
     </c:forEach>
   </tbody>
 </table>
   <button type="submit" class="btn btn-warning">Eliminar multiple</button>
-  <a href="Insertar" class="btn btn-primary">Insertar</a>
+  <a href="Insertar" class="btn btn-primary"><i class="fa-solid fa-plus"></i></a>
 </form>
 
 

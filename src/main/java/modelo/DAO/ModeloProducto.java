@@ -228,7 +228,5 @@ public class ModeloProducto {
 		    
 		con.cerrar();
 	}
-
-	
 	
 }

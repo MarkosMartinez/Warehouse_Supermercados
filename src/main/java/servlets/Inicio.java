@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import modelo.DAO.ModeloProducto;
 import modelo.DTO.Producto;
@@ -106,9 +107,20 @@ public class Inicio extends HttpServlet {
 			}
 			
 		}
+		
+		
+		
+		//Obtener el size del carrito
+		HttpSession session = request.getSession();
+		ArrayList<Producto> carrito = (ArrayList<Producto>) session.getAttribute("carrito");
+		int cantCarrito = 0;
+		if(carrito != null) {
+			cantCarrito = carrito.size();
+		}
+		
 		productos = mproducto.cargarProductos();
 		
-		
+		request.setAttribute("carrito", cantCarrito);
 		request.setAttribute("orden", orden);
 		request.setAttribute("productos", productos);
 		request.getRequestDispatcher("inicio.jsp").forward(request, response);
