@@ -38,9 +38,12 @@ public class AddCarrito extends HttpServlet {
 			producto = mproducto.getProducto(id);
 			HttpSession session = request.getSession();
 			ArrayList<Producto> carrito = new ArrayList();
+			
+			//Si el carrito, desde el login, esta vacio, omite el get.
 			if((ArrayList<Producto>) session.getAttribute("carrito") != null) {
 			carrito = (ArrayList<Producto>) session.getAttribute("carrito");
 			}
+			
 			carrito.add(producto);
 			session.setAttribute("carrito", carrito);
 			response.sendRedirect(request.getContextPath() + "/Inicio");

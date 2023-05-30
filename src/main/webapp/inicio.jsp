@@ -26,9 +26,7 @@
 </div>
 </form>
 
-<div class="carrito">
-<a href="#" style="position: absolute; right: 5px; margin-top: 5px" class="btn btn-success"><i class="fa-solid fa-cart-shopping"></i> ${carrito}</a>
-</div>
+<a href="#" style="position: absolute; right: 5px; margin-top: 5px" class="btn btn-info"><i class="fa-solid fa-cart-shopping"></i> ${carrito}</a>
 
 <h1>Lista de productos:</h1>
 
@@ -79,7 +77,7 @@
   </tbody>
 </table>
   <button type="submit" class="btn btn-warning">Eliminar multiple</button>
-  <a href="Insertar" class="btn btn-primary"><i class="fa-solid fa-plus"></i></a>
+  <a href="Insertar" class="btn btn-success"><i class="fa-solid fa-plus"></i></a>
 </form>
 
 
