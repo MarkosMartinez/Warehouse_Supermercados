@@ -26,7 +26,7 @@
 </div>
 </form>
 
-<a href="#" style="position: absolute; right: 5px; margin-top: 5px" class="btn btn-info"><i class="fa-solid fa-cart-shopping"></i> ${carrito}</a>
+<a href="Carrito" style="position: absolute; right: 5px; margin-top: 5px" class="btn btn-info"><i class="fa-solid fa-cart-shopping"></i> ${carrito}</a>
 
 <h1>Lista de productos:</h1>
 
