@@ -43,28 +43,6 @@ public class Inicio extends HttpServlet {
 		double max = Double.POSITIVE_INFINITY;
 		if(request.getParameter("max") != null && request.getParameter("max") != "")
 			max = Integer.parseInt(request.getParameter("max"));
-		
-		//Para aplicar el filtro de busqueda
-		if (busqueda != null) {
-			busqueda = busqueda.toLowerCase();
-		    Iterator<Producto> iterator = productos.iterator();
-		    while (iterator.hasNext()) {
-		        Producto producto = iterator.next();
-		        String codigoString = String.valueOf(producto.getCodigo());
-		        if (!producto.getNombre().toLowerCase().contains(busqueda) && !codigoString.contains(busqueda)) {
-		            iterator.remove();
-		        }
-		    }
-		}
-		
-		//Para aplicar el filtro de precio maximo / minimo
-	    Iterator<Producto> iterator = productos.iterator();
-	    while (iterator.hasNext()) {
-	        Producto producto = iterator.next();
-	        if (producto.getPrecio() < min || producto.getPrecio() > max) {
-	            iterator.remove();
-	        }
-	    }
 		    
 		//Para ordenar el codigo
 		String orden = request.getParameter("codOrden");
@@ -119,6 +97,28 @@ public class Inicio extends HttpServlet {
 		}
 		
 		productos = mproducto.cargarProductos();
+		
+		//Para aplicar el filtro de busqueda
+				if (busqueda != null) {
+					busqueda = busqueda.toLowerCase();
+				    Iterator<Producto> iterator = productos.iterator();
+				    while (iterator.hasNext()) {
+				        Producto producto = iterator.next();
+				        String codigoString = String.valueOf(producto.getCodigo());
+				        if (!producto.getNombre().toLowerCase().contains(busqueda) && !codigoString.contains(busqueda)) {
+				            iterator.remove();
+				        }
+				    }
+				}
+				
+				//Para aplicar el filtro de precio maximo / minimo
+			    Iterator<Producto> iterator = productos.iterator();
+			    while (iterator.hasNext()) {
+			        Producto producto = iterator.next();
+			        if (producto.getPrecio() < min || producto.getPrecio() > max) {
+			            iterator.remove();
+			        }
+			    }
 		
 		request.setAttribute("carrito", cantCarrito);
 		request.setAttribute("orden", orden);
