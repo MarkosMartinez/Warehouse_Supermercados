@@ -3,6 +3,7 @@ package modelo.DAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -44,12 +45,13 @@ public class ModeloProducto {
 		return productos;
 	}
 
-	public void insertar(String codigo, String nombre, int cantidad, Double precio, Date caducidad, int seccion) {
+	public int insertar(String codigo, String nombre, int cantidad, Double precio, Date caducidad, int seccion) {
 		Conector con = new Conector();
 		con.conectar();
+		int id = -1;
 		
 		try {
-			PreparedStatement pSt = con.getCon().prepareStatement("INSERT INTO `productos`(`codigo`, `nombre`, `cantidad`, `precio`, `caducidad`, `id_seccion`) VALUES (?, ?, ?, ?, ?, ?)");
+			PreparedStatement pSt = con.getCon().prepareStatement("INSERT INTO `productos`(`codigo`, `nombre`, `cantidad`, `precio`, `caducidad`, `id_seccion`) VALUES (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			pSt.setString(1, codigo);
 			pSt.setString(2, nombre);
 			pSt.setInt(3, cantidad);
@@ -57,12 +59,19 @@ public class ModeloProducto {
 			pSt.setDate(5, new java.sql.Date(caducidad.getTime()));
 			pSt.setInt(6, seccion);
 			pSt.execute();
+			
+			ResultSet generatedKeys = pSt.getGeneratedKeys();
+			if(generatedKeys.next()) {
+				id = generatedKeys.getInt(1);
+			}
+					
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 		con.cerrar();
 		
+		return id;
 	}
 
 	public boolean comprobarCodigo(String codigo) {

@@ -24,7 +24,7 @@
 <form action="Insertar" method="POST">
   <div class="mb-3">
     <label for="codigo" class="form-label">Codigo</label>
-    <input type="number" class="form-control" required="required" name="codigo">
+    <input type="text" class="form-control" required="required" name="codigo">
   </div>
   <div class="mb-3">
     <label for="nombre" class="form-label">Nombre</label>

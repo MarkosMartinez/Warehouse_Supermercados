@@ -79,7 +79,8 @@ public class Insertar extends HttpServlet {
 			boolean valido = cantidad>=0 && precio>=0 && caducidad.after(hoy) && request.getParameter("seccion") != null;
 			if(valido) {
 					int seccion = Integer.parseInt(request.getParameter("seccion"));
-					mproducto.insertar(codigo, nombre, cantidad, precio, caducidad, seccion);
+					int pk = mproducto.insertar(codigo, nombre, cantidad, precio, caducidad, seccion);
+					System.out.println("ID del nuevo producto insertado: " + pk);
 					ModeloSupermercado msupermercado = new ModeloSupermercado();
 					int idProducto = mproducto.getIdProductoPorCodigo(codigo);
 					for (String idsupermercado : supermercados) {
